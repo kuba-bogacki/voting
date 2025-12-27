@@ -1,7 +1,7 @@
 package com.voting.exception.handler;
 
-import com.voting.exception.ElectionsException;
-import com.voting.exception.PersonException;
+import com.voting.exception.ElectionException;
+import com.voting.exception.VoterException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(PersonException.class)
-    public ResponseEntity<?> handlePersonException(PersonException exception) {
+    @ExceptionHandler(VoterException.class)
+    public ResponseEntity<?> handleVoterException(VoterException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.FORBIDDEN);
     }
 
-    @ExceptionHandler(ElectionsException.class)
-    public ResponseEntity<?> handleElectionsException(ElectionsException exception) {
+    @ExceptionHandler(ElectionException.class)
+    public ResponseEntity<?> handleElectionException(ElectionException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.FORBIDDEN);
     }
 

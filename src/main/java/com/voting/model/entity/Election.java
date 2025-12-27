@@ -16,9 +16,9 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Elections {
+public class Election {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID electionsId;
+    private UUID electionId;
 }
