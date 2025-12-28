@@ -1,12 +1,14 @@
 package com.voting.mapper;
 
+import com.voting.model.dto.ElectionRequest;
 import com.voting.model.entity.Election;
-import com.voting.model.dto.ElectionDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface ElectionMapper {
 
-    Election mapToElectionEntity(ElectionDto electionDto);
-    ElectionDto mapToElectionDto(Election election);
+    @Mapping(target = "electionId", ignore = true)
+    @Mapping(target = "electionOptions", ignore = true)
+    Election mapToElectionEntity(ElectionRequest electionRequest);
 }

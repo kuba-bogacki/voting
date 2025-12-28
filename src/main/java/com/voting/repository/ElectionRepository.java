@@ -8,4 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface ElectionRepository extends JpaRepository<Election, UUID> {
+    Election findElectionByElectionName(String electionName);
 }

@@ -1,7 +1,7 @@
 package com.voting.controller;
 
-import com.voting.model.dto.VoterDto;
-import com.voting.model.dto.VoterStatusDto;
+import com.voting.model.dto.VoterRequest;
+import com.voting.model.dto.VoterStatusRequest;
 import com.voting.service.VoterService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,14 +19,14 @@ public class VoterController {
     private final VoterService voterService;
 
     @PostMapping(value = "/create")
-    public ResponseEntity<?> createNewVoter(@RequestBody @Valid VoterDto voterDto) {
-        voterService.createNewVoter(voterDto);
+    public ResponseEntity<?> createNewVoter(@RequestBody @Valid VoterRequest voterRequest) {
+        voterService.createNewVoter(voterRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PatchMapping(value = "/update")
-    public ResponseEntity<?> updateVoterStatus(@RequestBody @Valid VoterStatusDto voterStatusDto) {
-        voterService.changeVoterStatus(voterStatusDto);
+    public ResponseEntity<?> updateVoterStatus(@RequestBody @Valid VoterStatusRequest voterStatusRequest) {
+        voterService.changeVoterStatus(voterStatusRequest);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }

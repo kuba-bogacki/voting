@@ -4,10 +4,7 @@ import com.voting.model.type.VoterStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -26,14 +23,13 @@ public class Voter {
     @Column(nullable = false, unique = true)
     private String voterEmail;
 
-    @Size(min = 2, max = 64)
-    @Column(nullable = false)
+    @Column(nullable = false, length = 64)
     private String voterFirstName;
 
-    @Size(min = 2, max = 64)
-    @Column(nullable = false)
+    @Column(nullable = false, length = 64)
     private String voterLastName;
 
+    @Setter
     @Builder.Default
     @Enumerated(EnumType.STRING)
     private VoterStatus voterStatus = VoterStatus.UNBLOCKED;

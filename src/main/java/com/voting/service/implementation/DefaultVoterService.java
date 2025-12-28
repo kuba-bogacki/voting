@@ -2,9 +2,8 @@ package com.voting.service.implementation;
 
 import com.voting.exception.VoterException;
 import com.voting.mapper.VoterMapper;
-import com.voting.model.dto.VoterDto;
-import com.voting.model.dto.VoterStatusDto;
-import com.voting.model.entity.Voter;
+import com.voting.model.dto.VoterRequest;
+import com.voting.model.dto.VoterStatusRequest;
 import com.voting.repository.VoterRepository;
 import com.voting.service.VoterService;
 import lombok.RequiredArgsConstructor;
@@ -18,36 +17,34 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class DefaultVoterService implements VoterService {
 
-    private final VoterRepository voterRepository;
     private final VoterMapper voterMapper;
+    private final VoterRepository voterRepository;
 
     @Override
-    public void createNewVoter(VoterDto voterDto) {
-        final var existingVoter = Optional.ofNullable(voterRepository.findVoterByVoterEmail(voterDto.getVoterEmail()));
+    public void createNewVoter(VoterRequest voterRequest) {
+        final var existingVoter = Optional.ofNullable(voterRepository.findVoterByVoterEmail(voterRequest.getVoterEmail()));
 
         if (existingVoter.isPresent()) {
-            log.error("Cannot save new entity because voter with provided email address already exist");
-            throw new VoterException(String.format("Voter with email %s already exist", voterDto.getVoterEmail()));
+            log.error("Cannot save new voter entity because voter with provided email address already exist");
+            throw new VoterException(String.format("Voter with email %s already exist", voterRequest.getVoterEmail()));
         }
 
-        final var voterEntity = voterMapper.mapToVoterEntity(voterDto);
+        final var voterEntity = voterMapper.mapToVoterEntity(voterRequest);
         final var savedVoter = voterRepository.save(voterEntity);
         log.info("New voter entity has been saved with id {}", savedVoter.getVoterId());
     }
 
     @Override
-    public void changeVoterStatus(VoterStatusDto voterStatusDto) {
-        final var existingVoter = Optional.ofNullable(voterRepository.findVoterByVoterEmail(voterStatusDto.getVoterEmail()));
+    public void changeVoterStatus(VoterStatusRequest voterStatusRequest) {
+        final var existingVoter = Optional.ofNullable(voterRepository.findVoterByVoterEmail(voterStatusRequest.getVoterEmail()));
 
         if (existingVoter.isEmpty()) {
-            log.error("Cannot find voter with provided email address {}", voterStatusDto.getVoterEmail());
-            throw new VoterException(String.format("Voter with email %s not exist", voterStatusDto.getVoterEmail()));
+            log.error("Cannot find voter with provided email address {}", voterStatusRequest.getVoterEmail());
+            throw new VoterException(String.format("Voter with email %s not exist", voterStatusRequest.getVoterEmail()));
         }
 
-        final var updatedVoter = existingVoter.get().toBuilder()
-                .voterStatus(voterStatusDto.getVoterStatus())
-                .build();
-        final var savedVoter = voterRepository.save(updatedVoter);
+        existingVoter.get().setVoterStatus(voterStatusRequest.getVoterStatus());
+        final var savedVoter = voterRepository.save(existingVoter.get());
         log.info("Voter status has been updated to {} status", savedVoter.getVoterStatus());
     }
 }

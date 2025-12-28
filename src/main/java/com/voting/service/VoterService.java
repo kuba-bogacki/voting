@@ -1,9 +1,9 @@
 package com.voting.service;
 
-import com.voting.model.dto.VoterDto;
-import com.voting.model.dto.VoterStatusDto;
+import com.voting.model.dto.VoterRequest;
+import com.voting.model.dto.VoterStatusRequest;
 
 public interface VoterService {
-    void createNewVoter(VoterDto voterDto);
-    void changeVoterStatus(VoterStatusDto voterStatusDto);
+    void createNewVoter(VoterRequest voterRequest);
+    void changeVoterStatus(VoterStatusRequest voterStatusRequest);
 }
