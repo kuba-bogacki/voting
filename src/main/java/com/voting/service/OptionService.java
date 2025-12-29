@@ -8,4 +8,5 @@ import java.util.UUID;
 
 public interface OptionService {
     Option saveNewOption(OptionRequest optionRequest);
+    void addVoteForOption(UUID optionId);
 }

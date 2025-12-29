@@ -84,4 +84,27 @@ class DefaultVoterServiceTest extends VotingSamples {
                 .isInstanceOf(VoterException.class)
                 .hasMessageContaining(String.format("Voter with email %s not exist", voterEmailNo2));
     }
+
+    @Test
+    @DisplayName("Should return voter entity if voter with provided email exist")
+    void test_06() {
+        //when
+        final var result = voterService.getVoter(voterEmailNo1);
+
+        //then
+        assertThat(result)
+                .isEqualTo(voterEntityNo1);
+    }
+
+    @Test
+    @DisplayName("Should fail if voter with provided email not exist")
+    void test_07() {
+        //when
+        final var expectedException = catchException(() -> voterService.getVoter(voterEmailNo2));
+
+        //then
+        assertThat(expectedException)
+                .isInstanceOf(VoterException.class)
+                .hasMessageContaining(String.format("Voter with email %s not exist", voterEmailNo2));
+    }
 }

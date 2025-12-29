@@ -3,7 +3,6 @@ package com.voting.model.entity;
 import com.voting.model.type.VoterStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.UUID;
@@ -33,4 +32,16 @@ public class Voter {
     @Builder.Default
     @Enumerated(EnumType.STRING)
     private VoterStatus voterStatus = VoterStatus.UNBLOCKED;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Voter other)) return false;
+        return this.voterId != null && this.voterId.equals(other.getVoterId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

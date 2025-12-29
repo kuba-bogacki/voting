@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Entity
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class Option {
@@ -25,4 +25,16 @@ public class Option {
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     private Election election;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Option other)) return false;
+        return this.optionId != null && this.optionId.equals(other.getOptionId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
