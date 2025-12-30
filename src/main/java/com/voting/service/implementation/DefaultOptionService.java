@@ -1,7 +1,6 @@
 package com.voting.service.implementation;
 
 import com.voting.exception.OptionException;
-import com.voting.exception.VoterException;
 import com.voting.mapper.OptionMapper;
 import com.voting.model.dto.OptionRequest;
 import com.voting.model.entity.Option;
@@ -11,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j

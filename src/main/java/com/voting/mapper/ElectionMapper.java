@@ -10,5 +10,6 @@ public interface ElectionMapper {
 
     @Mapping(target = "electionId", ignore = true)
     @Mapping(target = "electionOptions", ignore = true)
+    @Mapping(target = "electionVoters", ignore = true)
     Election mapToElectionEntity(ElectionRequest electionRequest);
 }

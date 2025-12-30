@@ -1,7 +1,6 @@
 package com.voting.service.implementation;
 
 import com.voting.model.entity.Election;
-import com.voting.model.entity.Voter;
 import com.voting.repository.ElectionRepository;
 import org.apache.commons.lang3.NotImplementedException;
 import org.jspecify.annotations.NonNull;
@@ -17,10 +16,9 @@ import java.util.function.Function;
 @SuppressWarnings("all")
 class FakeElectionRepository extends VotingSamples implements ElectionRepository {
 
-    private final static String NO_IMPLEMENTED_METHOD = "No implementation for test purposes needed";
-
     private final Map<UUID, Election> inMemoryElectionDatabase = new HashMap<>() {{
         put(electionIdNo1, electionEntityNo1);
+        put(electionIdNo3, electionEntityNo3);
     }};
     private Election stubElection;
 

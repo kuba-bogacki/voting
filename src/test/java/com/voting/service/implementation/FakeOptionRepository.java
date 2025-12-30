@@ -16,8 +16,6 @@ import java.util.function.Function;
 @SuppressWarnings("all")
 class FakeOptionRepository extends VotingSamples implements OptionRepository {
 
-    private final static String NO_IMPLEMENTED_METHOD = "No implementation for test purposes needed";
-
     private final Map<UUID, Option> inMemoryOptionDatabase = new HashMap<>() {{
         put(optionIdNo1, optionEntityNo1);
     }};

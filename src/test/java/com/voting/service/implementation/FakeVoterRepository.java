@@ -16,8 +16,6 @@ import java.util.function.Function;
 @SuppressWarnings("all")
 class FakeVoterRepository extends VotingSamples implements VoterRepository {
 
-    private final static String NO_IMPLEMENTED_METHOD = "No implementation for test purposes needed";
-
     private final Map<UUID, Voter> inMemoryVoterDatabase = new HashMap<>() {{
         put(voterIdNo1, voterEntityNo1);
     }};
